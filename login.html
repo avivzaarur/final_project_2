@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE-edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Login Form</title>
+</head>
+<body>
+<h1 class="heading"> Login</h1>
+
+<form method="post">
+
+  <label>
+    <input type="text" name="username"
+           placeholder="Username" required>
+  </label>
+
+  <label>
+    <input type="text" name="password"
+           placeholder="Password" required>
+  </label>
+
+  <button type="submit" class="button"> Login </button>
+  <button onclick="document.location='change_password.html'">Change Password</button>
+  <button onclick="document.location='register.html'">Register</button>
+
+
+</form>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+  import axios from "axios";
+
+  document.getElementById('myForm').addEventListener('submit', function(event) {
+    event.preventDefault();  // Prevent default form submission
+
+    // Retrieve form data
+    const formData = new FormData(this);
+    const username = formData.get('username');
+    const password = formData.get('password');
+
+    // Send form data to backend using Axios
+    axios.post('/login.html', { username, password })
+            .then(function(response) {
+              // Handle the response from the backend
+              console.log(response.data);
+            })
+            .catch(function(error) {
+              // Handle any errors
+              console.error(error);
+            });
+  });
+</script>
+</body>
+</html>
